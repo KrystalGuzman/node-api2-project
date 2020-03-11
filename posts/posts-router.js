@@ -9,22 +9,34 @@ const router = express.Router(); //invoke Router()
 
 //GET /api/posts
 router.get('/', (req, res) => {
-    db.find(req.query)
-    .then(posts => {
-        if (req.body.hasOwnProperty("title") && req.body.hasOwnProperty("contents") ){
-          res.status(200).json(posts);  
-        } else{
-            res.status(400).json({errorMessage: "Please provide title and contents for the post."})
-        }
-    })
-    .catch(error => {
-      // log error to database
-      console.log(error);
-      res.status(500).json({
-        error: "There was an error while saving the post to the database",
-      });
+  db.find(req.query)
+  .then(posts => {
+    res.status(200).json(posts);
+  })
+  .catch(error => {
+    // log error to database
+    console.log(error);
+    res.status(500).json({
+      error: "The posts information could not be retrieved.",
     });
   });
+});
+  //   db.find(req.query)
+  //   .then(posts => {
+  //       if (req.body.hasOwnProperty("title") && req.body.hasOwnProperty("contents") ){
+  //         res.status(200).json(posts);  
+  //       } else{
+  //           res.status(400).json({errorMessage: "Please provide title and contents for the post."})
+  //       }
+  //   })
+  //   .catch(error => {
+  //     // log error to database
+  //     console.log(error);
+  //     res.status(500).json({
+  //       error: "There was an error while saving the post to the database",
+  //     });
+  //   });
+  // });
   
 //GET /api/posts/:id
   router.get('/:id', (req, res) => {

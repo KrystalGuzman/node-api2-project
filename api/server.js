@@ -1,10 +1,11 @@
 const express = require('express');
-
+const CORS = require('cors');
 const postsRouter = require("../posts/posts-router.js");
 
 const server = express();
 
 server.use(express.json());
+server.use(CORS());
 
 server.get('/', (req, res) => {
     const query = req.query;
