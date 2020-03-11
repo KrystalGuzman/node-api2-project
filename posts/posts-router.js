@@ -47,7 +47,7 @@ router.get('/', (req, res) => {
   
   //POST /api/posts
   router.post('/', (req, res) => {
-    db.add(req.body)
+    db.insert(req.body)
     .then(post => {
       res.status(201).json(post);
     })
@@ -65,7 +65,7 @@ router.get('/', (req, res) => {
     db.remove(req.params.id)
     .then(count => {
       if (count > 0) {
-        res.status(200).json({ message: 'The post has been nuked' });
+        res.status(200).json({ message: 'The post has been deleted' });
       } else {
         res.status(404).json({ message: "The post with the specified ID does not exist." });
       }
